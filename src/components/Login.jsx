@@ -13,6 +13,7 @@ function Login() {
 
  const handelSubmit = (e)=>{
     e.preventDefault()
+    console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`,{
         email,
         password
