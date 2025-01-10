@@ -9,7 +9,7 @@ function Login() {
 
  const navigate = useNavigate()
 
- axios.defaults.withCredentials = true;
+
 
  const handelSubmit = (e)=>{
     e.preventDefault()
@@ -17,13 +17,23 @@ function Login() {
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`,{
         email,
         password
-    }).then((res)=>{
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+  })
+  .then((res)=>{
       if(res.data.status){
         navigate('/dashboard')
+      }else{
+        alert("invalid email or password")
       }
+      
     
     }).catch((err)=>{
-        console.log(err)
+      console.error('Login error:', err);
+    alert('Login failed. Please try again.');
     })
  }
 
